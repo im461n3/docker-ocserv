@@ -56,7 +56,15 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 		echo "Create test user 'test' with password 'test'"
 		echo 'test:*:$5$DktJBFKobxCFd7wN$sn.bVw8ytyAaNamO.CvgBvkzDiFR6DaHdUzcif52KK7' > /etc/ocserv/ocpasswd
 	fi
+	
+	# Change to certificate auth
+	if [ ! -z "$CERTIFICATE_AUTH" ]; then
+		sed -i 's/^auth/#auth/' /etc/ocserv/ocserv.conf \
+		&& sed -i 's/#\(auth = "certificate"\)/\1/' /etc/ocserv/ocserv.conf \
+	fi
 fi
+
+
 
 # Open ipv4 ip forward
 sysctl -w net.ipv4.ip_forward=1

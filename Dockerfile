@@ -57,7 +57,7 @@ RUN buildDeps=" \
 
 # Setup config
 COPY route.txt /tmp/
-COPY cert-client.sh client.tmpl /etc/ocserv
+COPY cert-client.sh client.tmpl /etc/ocserv/
 RUN set -x \
 #	&& sed -i 's/\.\/sample\.passwd/\/etc\/ocserv\/ocpasswd/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/^auth/#auth/' /etc/ocserv/ocserv.conf \

@@ -60,7 +60,7 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 	# Change to certificate auth
 	if [ ! -z "$CERTIFICATE_AUTH" ]; then
 		sed -i 's/^auth/#auth/' /etc/ocserv/ocserv.conf \
-		&& sed -i 's/#\(auth = "certificate"\)/\1/' /etc/ocserv/ocserv.conf \
+		&& sed -i 's/#\(auth = "certificate"\)/\1/' /etc/ocserv/ocserv.conf
 	fi
 fi
 

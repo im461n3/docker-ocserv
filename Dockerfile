@@ -61,7 +61,7 @@ COPY cert-client.sh client.tmpl /etc/ocserv/
 RUN set -x \
 #	&& sed -i 's/\.\/sample\.passwd/\/etc\/ocserv\/ocpasswd/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/^auth/#auth/' /etc/ocserv/ocserv.conf \
-	&& sed -i 's/#\(auth = "certificate"\)/\1' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/#\(auth = "certificate"\)/\1/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/\(max-clients = \)16/\11024/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/\(max-same-clients = \)2/\15/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/\.\.\/tests/\/etc\/ocserv/' /etc/ocserv/ocserv.conf \

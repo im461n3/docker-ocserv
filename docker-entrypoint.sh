@@ -3,11 +3,11 @@
 if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; then
 	# Check environment variables
 	if [ -z "$CA_CN" ]; then
-		CA_CN="VPN CA"
+		CA_CN="ZHRES CA"
 	fi
 
 	if [ -z "$CA_ORG" ]; then
-		CA_ORG="Big Corp"
+		CA_ORG="ZHRES"
 	fi
 
 	if [ -z "$CA_DAYS" ]; then
@@ -15,11 +15,11 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 	fi
 
 	if [ -z "$SRV_CN" ]; then
-		SRV_CN="www.example.com"
+		SRV_CN="vpn.zhres.com"
 	fi
 
 	if [ -z "$SRV_ORG" ]; then
-		SRV_ORG="MyCompany"
+		SRV_ORG="ZHRES"
 	fi
 
 	if [ -z "$SRV_DAYS" ]; then
@@ -39,7 +39,7 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 	cert_signing_key
 	crl_signing_key
 	EOCA
-	certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca.pem
+	certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
 	certtool --generate-privkey --outfile server-key.pem 
 	cat > server.tmpl <<-EOSRV
 	cn = "$SRV_CN"

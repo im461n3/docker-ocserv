@@ -44,6 +44,7 @@ RUN buildDeps=" \
 	&& tar -xf ocserv.tar.xz -C /usr/src/ocserv --strip-components=1 \
 	&& rm ocserv.tar.xz* \
 	&& cd /usr/src/ocserv \
+	&& sed -i 's/define DEFAULT_CONFIG_ENTRIES 96/define DEFAULT_CONFIG_ENTRIES 200/g' src/vpn.h \
 	&& ./configure \
 	&& make -j"$(nproc)" \
 	&& make install \
@@ -56,9 +57,13 @@ RUN buildDeps=" \
 
 # Setup config
 COPY route.txt /tmp/
+COPY cert-client.sh client.tmpl /etc/ocserv
 RUN set -x \
-	&& sed -i 's/\.\/sample\.passwd/\/etc\/ocserv\/ocpasswd/' /etc/ocserv/ocserv.conf \
-	&& sed -i 's/\(max-same-clients = \)2/\110/' /etc/ocserv/ocserv.conf \
+#	&& sed -i 's/\.\/sample\.passwd/\/etc\/ocserv\/ocpasswd/' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/^auth/#auth/' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/#\(auth = "certificate"\)/\1' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/\(max-clients = \)16/\11024/' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/\(max-same-clients = \)2/\15/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/\.\.\/tests/\/etc\/ocserv/' /etc/ocserv/ocserv.conf \
 	&& sed -i 's/#\(compression.*\)/\1/' /etc/ocserv/ocserv.conf \
 	&& sed -i '/^ipv4-network = /{s/192.168.1.0/192.168.99.0/}' /etc/ocserv/ocserv.conf \

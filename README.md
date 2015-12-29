@@ -114,3 +114,8 @@ The above command will delete the default user `test`, if you start the instance
 #### Change password
 
 Change password is exactly the same command as add user, please refer to the command mentioned above.
+
+### Certificate auth
+```bash
+docker run -d --name ocserv4 --privileged -p 433:433 -p 433:433/udp -e CA_CN="My CA" -e CA_ORG="My Corp" -e CA_DAYS=3650 -e SRV_CN=my.test.com -e SRV_ORG="My Test" -e SRV_DAYS=3650 -e LISTEN_PORT=233 -e NO_TEST_USER=1 -e CERTIFICATE_AUTH=1 -v /root/docker-ocserv/ocpasswd:/etc/ocserv/ocpasswd langs/ocserv-certificated:v2
+```

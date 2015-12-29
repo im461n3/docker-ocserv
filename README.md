@@ -87,6 +87,12 @@ Start an instance as above but without test user
 docker run --name ocserv --privileged -p 443:443 -p 443:443/udp -e CA_CN="My CA" -e CA_ORG="My Corp" -e CA_DAYS=3650 -e SRV_CN=my.test.com -e SRV_ORG="My Test" -e SRV_DAYS=365 -e NO_TEST_USER=1 -v /some/path/to/ocpasswd:/etc/ocserv/ocpasswd -d tommylau/ocserv
 ```
 
+Start an instance with certificate auth
+
+```bash
+docker run -d --name ocserv4 --privileged -p 443:443 -p 443:443/udp -e CA_CN="My CA" -e CA_ORG="My Corp" -e CA_DAYS=3650 -e SRV_CN=my.test.com -e SRV_ORG="My Test" -e SRV_DAYS=3650 -e LISTEN_PORT=443 -e NO_TEST_USER=1 -e CERTIFICATE_AUTH=1 -v /root/docker-ocserv/ocpasswd:/etc/ocserv/ocpasswd langs/ocserv-certificated:v2
+```
+
 **WARNING:** The ocserv requires the ocpasswd file to start, if `NO_TEST_USER=1` is provided, there will be no ocpasswd created, which will stop the container immediately after start it. You must specific a ocpasswd file pointed to `/etc/ocserv/ocpasswd` by using the volume argument `-v` by docker as demonstrated above.
 
 ### User operations
@@ -119,7 +125,4 @@ The above command will delete the default user `test`, if you start the instance
 
 Change password is exactly the same command as add user, please refer to the command mentioned above.
 
-### Certificate auth
-```bash
-docker run -d --name ocserv4 --privileged -p 433:433 -p 433:433/udp -e CA_CN="My CA" -e CA_ORG="My Corp" -e CA_DAYS=3650 -e SRV_CN=my.test.com -e SRV_ORG="My Test" -e SRV_DAYS=3650 -e LISTEN_PORT=233 -e NO_TEST_USER=1 -e CERTIFICATE_AUTH=1 -v /root/docker-ocserv/ocpasswd:/etc/ocserv/ocpasswd langs/ocserv-certificated:v2
-```
+#### Add user's certificate

@@ -66,8 +66,8 @@ fi
 
 # Modify listen port in main configuration file
 if [ ! -z "$LISTEN_PORT" ]; then
-	sed -i 's/\(tcp-port = \)443/\1$LISTEN_PORT/' /etc/ocserv/ocserv.conf \
-	&& sed -i 's/\(udp-port = \)443/\1$LISTEN_PORT/' /etc/ocserv/ocserv.conf
+	sed -i 's/\(tcp-port = \)443/\1'"$LISTEN_PORT"'/' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/\(udp-port = \)443/\1'"$LISTEN_PORT"'/' /etc/ocserv/ocserv.conf
 fi
 
 

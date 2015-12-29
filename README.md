@@ -40,6 +40,10 @@ All the variables to this image is optional, which means you don't have to type 
 
 `NO_TEST_USER`, while this variable is set to not empty, the `test` user will not be created. You have to create your own user with password. The default value is to create `test` user with password `test`.
 
+`CERTIFICATE_AUTH`, while this variable is set to not empty, ocserv will run in certificate auth mode.
+
+`LISTEN_PORT`, this is the tcp & udp port which ocserv will listen to.
+
 The default values of the above environment variables:
 
 |   Variable   |     Default     |

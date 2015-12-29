@@ -64,7 +64,10 @@ if [ ! -f /etc/ocserv/server-key.pem ] || [ ! -f /etc/ocserv/server-cert.pem ]; 
 	fi
 fi
 
-
+# Modify listen port in main configuration file
+set -x \
+	&& sed -i 's/\(tcp-port = \)443/\1$LISTEN_PORT/' /etc/ocserv/ocserv.conf \
+	&& sed -i 's/\(udp-port = \)443/\1$LISTEN_PORT/' /etc/ocserv/ocserv.conf
 
 # Open ipv4 ip forward
 sysctl -w net.ipv4.ip_forward=1

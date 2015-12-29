@@ -74,9 +74,8 @@ RUN set -x \
 	&& rm -fr /tmp/route.txt
 
 WORKDIR /etc/ocserv
-ENV LISTEN_PORT 443
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
-EXPOSE $LISTEN_PORT
+EXPOSE 443
 CMD ["ocserv", "-c", "/etc/ocserv/ocserv.conf", "-f"]
